@@ -17,7 +17,7 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.description}>
           <p>
-            Tonz: The Music Social Hub&nbsp;
+            Tonz: The Next Great Music Social Hub&nbsp;
             <code className={styles.code}>pages/index.tsx</code>
           </p>
           <div>
