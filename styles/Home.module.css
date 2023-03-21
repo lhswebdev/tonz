@@ -97,7 +97,7 @@
 
 .center::before,
 .center::after {
-  content: '';
+  content: "";
   left: 50%;
   position: absolute;
   filter: blur(45px);
@@ -113,7 +113,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 75px;
+  width: auto;
   height: 75px;
   padding: 25px 10px;
   margin-left: 16px;
@@ -125,7 +125,7 @@
 
 .thirteen::before,
 .thirteen::after {
-  content: '';
+  content: "";
   position: absolute;
   z-index: -1;
 }

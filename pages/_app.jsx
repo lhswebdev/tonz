@@ -1,11 +1,12 @@
-import { SessionProvider } from 'next-auth/react';
+import { SessionProvider } from "next-auth/react";
 import {
   useQuery,
   useMutation,
   useQueryClient,
   QueryClient,
   QueryClientProvider,
-} from 'react-query';
+} from "react-query";
+import "../styles/globals.css";
 
 const queryClient = new QueryClient();
 
