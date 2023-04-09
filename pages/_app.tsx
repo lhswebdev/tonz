@@ -7,20 +7,18 @@ import {
   QueryClientProvider,
 } from "react-query";
 import { ChakraProvider } from "@chakra-ui/react";
+import { AppProps } from "next/app";
 
 const queryClient = new QueryClient();
 
-export default function App({
-  Component,
-  pageProps: { session, ...pageProps },
-}) {
+export default function App({ Component, pageProps, router }: AppProps) {
   return (
-    <ChakraProvider>
-      <QueryClientProvider client={queryClient}>
-        <SessionProvider session={session}>
+    <QueryClientProvider client={queryClient}>
+      <SessionProvider session={pageProps.session}>
+        <ChakraProvider>
           <Component {...pageProps} />
-        </SessionProvider>
-      </QueryClientProvider>
-    </ChakraProvider>
+        </ChakraProvider>
+      </SessionProvider>
+    </QueryClientProvider>
   );
 }

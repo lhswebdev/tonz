@@ -1,6 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
-import NextLink from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
 import {
   Heading,
@@ -13,10 +11,20 @@ import {
   MenuList,
   MenuItem,
   Avatar,
+  Text,
+  MenuDivider,
+  Card,
+  CardBody,
+  Stack,
+  IconButton,
+  Image,
+  Icon,
 } from "@chakra-ui/react";
+import { FiShare } from "react-icons/fi";
 
 export default function Home() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+
   return (
     <>
       <Head>
@@ -24,29 +32,65 @@ export default function Home() {
       </Head>
       <nav>
         <Flex w="100%" p={4} justify="evenly">
-          <Heading>Tonz</Heading>
+          <Heading size="md">Tonz</Heading>
           <Spacer />
-          {!session ? (
-            <Button onClick={signIn}>Login</Button>
+          {status == "unauthenticated" || status == "loading" ? (
+            <Button onClick={() => signIn()}>Login</Button>
           ) : (
             <Menu>
               <MenuButton>
                 <Avatar
-                  name={session.user.name}
-                  src={session.user.image}
-                  as={Avatar}
+                  name={session!.user?.name || ""}
+                  src={session!.user?.image || ""}
+                  size={"sm"}
                 />
-                <Heading>{session.user.email}</Heading>
               </MenuButton>
               <MenuList>
+                <Text px={3}>
+                  {session!.user?.name} ({session!.user?.email})
+                </Text>
+                <MenuDivider />
                 <MenuItem>Connect Account</MenuItem>
                 <MenuItem>Generate Recommendations</MenuItem>
-                <MenuItem>Log Out</MenuItem>
+                <MenuItem onClick={() => signOut()}>Log Out</MenuItem>
               </MenuList>
             </Menu>
           )}
         </Flex>
       </nav>
+      <body>
+        {session ? (
+          <>
+            <Card maxW="sm" m="auto">
+              <CardBody>
+                <Heading size="md" mb="4">
+                  Listening To
+                </Heading>
+                <Image
+                  src="https://c.neevacdn.net/image/fetch/s--35cyv_xI--/https%3A//m.media-amazon.com/images/I/7176iTv3geL._SS500_.jpg?savepath=7176iTv3geL._SS500_.jpg"
+                  alt="Album Cover"
+                  borderRadius="lg"
+                />
+                <Stack mt="6" mb={1} spacing="3">
+                  <Heading size="md">Never Gonna Give You Up</Heading>
+                  <Text>Rick Astley - Whenever You Need Somebody</Text>
+                </Stack>
+                <IconButton
+                  h="auto"
+                  minW={0}
+                  p={1}
+                  aria-label="Share with friends"
+                  icon={<Icon p={0} as={FiShare} />}
+                  colorScheme="blue"
+                  variant="ghost"
+                />
+              </CardBody>
+            </Card>
+          </>
+        ) : (
+          <Heading textAlign="center">What is Tonz?</Heading>
+        )}
+      </body>
     </>
   );
 }
