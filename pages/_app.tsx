@@ -1,13 +1,13 @@
-import { SessionProvider } from "next-auth/react";
+import { SessionProvider } from 'next-auth/react';
 import {
   useQuery,
   useMutation,
   useQueryClient,
   QueryClient,
   QueryClientProvider,
-} from "react-query";
-import { ChakraProvider } from "@chakra-ui/react";
-import { AppProps } from "next/app";
+} from '@tanstack/react-query';
+import { ChakraProvider } from '@chakra-ui/react';
+import { AppProps } from 'next/app';
 
 const queryClient = new QueryClient();
 
