@@ -1,10 +1,9 @@
-import Head from "next/head";
-import { useSession, signIn, signOut } from "next-auth/react";
+import Head from 'next/head';
+import { useSession, signIn, signOut } from 'next-auth/react';
 import {
   Heading,
   Flex,
   Spacer,
-  Link,
   Button,
   Menu,
   MenuButton,
@@ -19,8 +18,8 @@ import {
   IconButton,
   Image,
   Icon,
-} from "@chakra-ui/react";
-import { FiShare } from "react-icons/fi";
+} from '@chakra-ui/react';
+import { FiShare } from 'react-icons/fi';
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -34,21 +33,19 @@ export default function Home() {
         <Flex w="100%" p={4} justify="evenly">
           <Heading size="md">Tonz</Heading>
           <Spacer />
-          {status == "unauthenticated" || status == "loading" ? (
+          {status == 'unauthenticated' || status == 'loading' ? (
             <Button onClick={() => signIn()}>Login</Button>
           ) : (
             <Menu>
               <MenuButton>
                 <Avatar
-                  name={session!.user?.name || ""}
-                  src={session!.user?.image || ""}
-                  size={"sm"}
+                  name={session!.user?.name || ''}
+                  src={session!.user?.picture || ''}
+                  size={'sm'}
                 />
               </MenuButton>
               <MenuList>
-                <Text px={3}>
-                  {session!.user?.name} ({session!.user?.email})
-                </Text>
+                <Text px={3}>{session!.user?.name}</Text>
                 <MenuDivider />
                 <MenuItem>Connect Account</MenuItem>
                 <MenuItem>Generate Recommendations</MenuItem>
@@ -58,7 +55,7 @@ export default function Home() {
           )}
         </Flex>
       </nav>
-      <body>
+      <div>
         {session ? (
           <>
             <Card maxW="sm" m="auto">
@@ -90,7 +87,7 @@ export default function Home() {
         ) : (
           <Heading textAlign="center">What is Tonz?</Heading>
         )}
-      </body>
+      </div>
     </>
   );
 }
